@@ -85,3 +85,17 @@ test('sanitizeSettings rejects junk', () => {
   assert.equal(s.cutSpeed, 12);
   assert.equal(s.pierceSec, 0.4);
 });
+
+test('planJob scores before cutting and sums travel', async () => {
+  const { planJob } = await import('../src/geometry.js');
+  const layers = groupLayers([rect(0, 0, 10, 10, '#ff0000'), rect(50, 0, 10, 10, '#0000ff')]);
+  const { plan, travelMm } = planJob(layers, [0, 0]);
+  assert.deepEqual(plan.map((p) => p.op), ['score', 'cut']);
+  assert.equal(travelMm, 100); // 0,0 -> 50,0 -> back to 0,0
+});
+
+test('groupLayers prefers an exact length supplied by the sampler', () => {
+  const c = { ...rect(0, 0, 10, 10), lengthMm: 31.4 };
+  const [layer] = groupLayers([c]);
+  assert.equal(layer.lengthMm, 31.4);
+});
