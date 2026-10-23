@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Beamtime: laser job time and price from an SVG</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="bar">
+    <h1>Beamtime</h1>
+    <p>Laser cutting time and price from an SVG. The file stays in your browser.</p>
+  </header>
+
+  <main class="layout">
+    <section class="bed" id="bed">
+      <canvas id="canvas" aria-label="Machine bed preview"></canvas>
+      <div class="drop" id="drop">
+        <p class="drop-title">Drop an SVG here</p>
+        <p class="drop-sub">or <label class="link"><input type="file" id="file" accept=".svg,image/svg+xml" hidden>choose a file</label>
+          or <button type="button" class="link" id="sample">load the sample box</button></p>
+        <p class="drop-error" id="error" role="alert"></p>
+      </div>
+      <div class="bed-bar">
+        <button type="button" id="play" disabled>Play cut</button>
+        <span class="clock" id="clock">0:00</span>
+        <span class="bed-note" id="bedNote"></span>
+        <label class="link small"><input type="file" id="file2" accept=".svg,image/svg+xml" hidden>Open another file</label>
+      </div>
+    </section>
+
+    <aside class="panel">
+      <section>
+        <h2>File</h2>
+        <dl class="kv">
+          <dt>Name</dt><dd id="fName">none</dd>
+          <dt>Parts extent</dt><dd id="fSize">-</dd>
+          <dt>Scale</dt>
+          <dd><input type="number" id="scale" step="any" min="0" aria-label="Millimetres per SVG unit"> mm per unit <span id="scaleNote" class="note"></span></dd>
+        </dl>
+        <p class="note" id="skipped"></p>
+      </section>
+
+      <section>
+        <h2>Layers</h2>
+        <table class="layers">
+          <thead><tr><th>Colour</th><th>Operation</th><th class="num">Length</th><th class="num">Pierces</th></tr></thead>
+          <tbody id="layers"><tr><td colspan="4" class="note">Load a file to see its colour layers.</td></tr></tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Quote</h2>
+        <table class="quote">
+          <tbody id="quote"><tr><td class="note">-</td></tr></tbody>
+        </table>
+        <div class="actions">
+          <button type="button" id="copy" disabled>Copy quote</button>
+          <span class="note" id="copied"></span>
+        </div>
+      </section>
+
+      <details class="settings" open>
+        <summary>Machine and material</summary>
+        <p class="note">Example values for a 60 W CO2 laser on 3 mm plywood. Set your own; they are saved in this browser.</p>
+        <form id="settings" class="grid">
+          <label>Cut speed <span><input type="number" step="any" min="0" data-key="cutSpeed"> mm/s</span></label>
+          <label>Score speed <span><input type="number" step="any" min="0" data-key="scoreSpeed"> mm/s</span></label>
+          <label>Pierce time <span><input type="number" step="any" min="0" data-key="pierceSec"> s</span></label>
+          <label>Travel speed <span><input type="number" step="any" min="0" data-key="travelSpeed"> mm/s</span></label>
+          <label>Setup <span><input type="number" step="any" min="0" data-key="setupMin"> min</span></label>
+          <label>Machine rate <span><input type="number" step="any" min="0" data-key="ratePerMin"> /min</span></label>
+          <label>Sheet width <span><input type="number" step="any" min="0" data-key="sheetW"> mm</span></label>
+          <label>Sheet height <span><input type="number" step="any" min="0" data-key="sheetH"> mm</span></label>
+          <label>Sheet price <span><input type="number" step="any" min="0" data-key="sheetPrice"></span></label>
+          <label>Currency <span><input type="text" maxlength="6" data-key="currency"></span></label>
+          <label class="check"><input type="checkbox" data-key="chargeFullSheet"> Charge whole sheets</label>
+          <button type="button" id="reset" class="link small">Reset to example values</button>
+        </form>
+      </details>
+    </aside>
+  </main>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>

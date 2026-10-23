@@ -94,7 +94,7 @@ export function groupLayers(contours, ops = {}) {
   const byColor = new Map();
   for (const c of contours) {
     if (c.points.length < 2) continue;
-    const lengthMm = polylineLength(c.points, c.closed);
+    const lengthMm = c.lengthMm > 0 ? c.lengthMm : polylineLength(c.points, c.closed);
     const item = { ...c, lengthMm, box: bbox(c.points) };
     if (!byColor.has(c.color)) byColor.set(c.color, []);
     byColor.get(c.color).push(item);
@@ -158,4 +158,24 @@ export function orderContours(contours, start = [0, 0]) {
     head = contours[best].closed ? pts[0] : pts[pts.length - 1];
   }
   return { order, travelMm };
+}
+
+/**
+ * Whole job: score contours first (so parts do not move after they are cut free),
+ * then cut contours with holes before outlines. Returns { plan: [{ contour, op }], travelMm }.
+ */
+export function planJob(layers, start = [0, 0]) {
+  const plan = [];
+  let travelMm = 0;
+  let head = start;
+  for (const op of ['score', 'cut']) {
+    const contours = layers.filter((l) => l.op === op).flatMap((l) => l.contours);
+    if (!contours.length) continue;
+    const r = orderContours(contours, head);
+    travelMm += r.travelMm;
+    for (const c of r.order) plan.push({ contour: c, op });
+    const last = r.order[r.order.length - 1];
+    head = last.closed ? last.points[0] : last.points[last.points.length - 1];
+  }
+  return { plan, travelMm };
 }
