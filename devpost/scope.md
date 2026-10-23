@@ -1,6 +1,6 @@
 ---
 doc: scope
-status: draft
+status: approved
 ---
 <!-- Drafted by the coding agent from Leandro's existing laser-cutting work
      (StepToLaserKit, makerspace jobs). Leandro reviews, corrects, and sets
@@ -46,4 +46,4 @@ Drop an SVG of a finger-joint box. The app shows the parts, lists the red layer 
 ## Explicitly Cut
 - Machine connection or G-code: out of reach in a day, and the point is to estimate before the machine.
 - Accounts and server storage: not needed for one person estimating a job; everything stays in the browser.
-- Material database with real prices: prices differ per shop; the user types their own. (Assumption: Leandro agrees default values are examples only.)
+- Material database with real prices: prices differ per shop; the user types their own. (Confirmed by Leandro 23.10.2026: default values are examples only.)

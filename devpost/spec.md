@@ -1,6 +1,6 @@
 ---
 doc: spec
-status: draft
+status: approved
 ---
 <!-- Drafted by the coding agent. Leandro reviews and sets status to approved. -->
 
@@ -97,6 +97,6 @@ None. No network calls, no keys, no cost.
 
 ## Decisions and Open Issues
 - No framework (agent recommendation, to keep the POC to static files). Leandro to confirm.
-- Colour-to-operation defaults by hue (agent assumption based on common makerspace practice).
+- Colour-to-operation defaults by hue (confirmed by Leandro 23.10.2026: red cut, blue score).
 - Uncertainty discussed: how SVG units map to mm. Clarified by reading width/height units and viewBox; covered by a unit test fixture.
 - Open: corner slowdown not modelled; documented as a known underestimate.

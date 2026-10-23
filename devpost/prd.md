@@ -1,6 +1,6 @@
 ---
 doc: prd
-status: draft
+status: approved
 ---
 <!-- Drafted by the coding agent. Leandro reviews and sets status to approved. -->
 
@@ -60,7 +60,7 @@ Dark bed (near-black), red cut lines, blue score lines, grey ignored lines, a th
 - **Privacy** — the file never leaves the browser.
 
 ## Product Decisions
-- Colour = operation, because that is how makerspace laser files are prepared (Assumption: red cut, blue score is the convention Leandro uses).
+- Colour = operation, because that is how makerspace laser files are prepared (Confirmed by Leandro 23.10.2026: red cut, blue score is his convention).
 - Defaults are example values for a 60 W CO2 laser on 3 mm plywood and are labelled as examples.
 
 ## What We're Building
