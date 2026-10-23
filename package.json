@@ -1,0 +1,15 @@
+{
+  "name": "beamtime",
+  "version": "0.1.0",
+  "description": "Laser cutting time and price estimate from an SVG, in the browser.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "start": "node serve.mjs",
+    "test": "node --test test/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
